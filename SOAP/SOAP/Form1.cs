@@ -17,15 +17,29 @@ namespace SOAP
    
     public partial class Form1 : Form
     {
-        //string Currencies = new BindingList<RateData>
+        
         
         public Form1()
         {
             InitializeComponent();
+          //  BindingList<string> Currencies = new BindingList<string>();
+           // comboBox1.DataSource = Currencies;
+           // GetCurrencies();
             Refreshdata();
             
             
         }
+
+        //private void GetCurrencies()
+       // {
+           // var mnbService = new MNBArfolyamServiceSoapClient();
+           // var currencyrequest = new GetCurrenciesRequest() 
+           // { 
+                
+           // }
+            //;
+
+       // }
 
         public void Refreshdata()
         {
@@ -33,7 +47,7 @@ namespace SOAP
             GetExhangeRates();
         }
 
-        public void GetExhangeRates()
+        private void GetExhangeRates()
         {
             
             //WEBSZOLGALTATAS HIVASA

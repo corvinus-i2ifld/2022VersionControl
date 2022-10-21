@@ -1,4 +1,5 @@
-﻿using SOAP.MnbServiceReference;
+﻿using SOAP.Entities;
+using SOAP.MnbServiceReference;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,6 +20,7 @@ namespace SOAP
         {
             InitializeComponent();
             GetExhangeRates();
+            
         }
 
         private void GetExhangeRates()
@@ -34,7 +36,10 @@ namespace SOAP
             var response = mnbService.GetExchangeRates(request);
 
             var result = response.GetExchangeRatesResult;
-            richTextBox1.Text = result;
+
+            var Rates = new BindingList<RateData>();
+            dataGridView1.DataSource = Rates;
+
         }
     }
 }

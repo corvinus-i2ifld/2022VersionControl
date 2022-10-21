@@ -38,7 +38,7 @@ namespace SOAP
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(12, 39);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(250, 399);
+            this.dataGridView1.Size = new System.Drawing.Size(371, 399);
             this.dataGridView1.TabIndex = 0;
             // 
             // Form1

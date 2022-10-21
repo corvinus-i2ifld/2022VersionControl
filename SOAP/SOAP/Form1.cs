@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Xml;
 
 namespace SOAP
@@ -16,37 +17,45 @@ namespace SOAP
    
     public partial class Form1 : Form
     {
+        //string Currencies = new BindingList<RateData>
         
         public Form1()
         {
             InitializeComponent();
+            Refreshdata();
+            
+            
+        }
+
+        public void Refreshdata()
+        {
+            
             GetExhangeRates();
-            XmlProcessing();
-            
         }
 
-        private void XmlProcessing()
+        public void GetExhangeRates()
         {
             
-        }
-
-        private void GetExhangeRates()
-        {
+            //WEBSZOLGALTATAS HIVASA
             var mnbService = new MNBArfolyamServiceSoapClient();
-
+            comboBox1.Text = "EUR";
             var request = new GetExchangeRatesRequestBody()
-            { 
-                currencyNames="EUR",
-                startDate = "2020-01-01",
-                endDate = "2020-06-30"
+            {
+                currencyNames = comboBox1.SelectedItem.ToString(),
+                startDate = startDatePicker.Value.ToString(),
+                endDate = endDatePicker.Value.ToString()
             };
             var response = mnbService.GetExchangeRates(request);
 
             var result = response.GetExchangeRatesResult;
 
-            var Rates = new BindingList<RateData>();
+            var Rates = new BindingList<RateData>(); 
+            Rates.Clear();
             dataGridView1.DataSource = Rates;
 
+
+
+            //XML LETREHOZASA
 
             var xml = new XmlDocument();
             xml.LoadXml(result);
@@ -70,8 +79,37 @@ namespace SOAP
                 if (unit != 0)
                     rate.Value = value / unit;
 
+                //CHART
+
+                chartRateData.DataSource = Rates;
+
+                var series = chartRateData.Series[0];
+                series.ChartType = SeriesChartType.Line;
+                series.XValueMember = "Date";
+                series.YValueMembers = "Value";
+                series.BorderWidth = 2;
+
+                var chartArea = chartRateData.ChartAreas[0];
+                chartArea.AxisX.MajorGrid.Enabled = false;
+                chartArea.AxisY.MajorGrid.Enabled = false;
+                chartArea.AxisY.IsStartedFromZero = false;
             }
 
+        }
+
+        private void startDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            Refreshdata();
+        }
+
+        private void endDatePicker_ValueChanged(object sender, EventArgs e)
+        {
+            Refreshdata();
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Refreshdata();
         }
     }
 }

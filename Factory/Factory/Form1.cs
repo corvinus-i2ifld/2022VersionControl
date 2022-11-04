@@ -83,7 +83,10 @@ namespace Factory
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Faktory = new BallFactory();
+            Faktory = new BallFactory
+            {
+                BallColor = btnBallColor.BackColor
+            };
         }
 
         private void btnColor_Click(object sender, EventArgs e)

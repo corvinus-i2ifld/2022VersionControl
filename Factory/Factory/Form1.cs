@@ -17,10 +17,24 @@ namespace Factory
 
         private List<Toy> _toys = new List<Toy>();
         private IToyFactory _faktory;
+
+        private Toy _nextToy;
         public IToyFactory Faktory
         {
             get { return _faktory; }
-            set { _faktory = value; }
+            set { _faktory = value;
+                DisplayNext();
+            }
+        }
+
+        private void DisplayNext()
+        {
+            if (_nextToy != null)
+                Controls.Remove(_nextToy);
+            _nextToy = Faktory.CreateNew();
+            _nextToy.Top = lblNext.Top + lblNext.Height + 25;
+            _nextToy.Left = lblNext.Left;
+            Controls.Add(_nextToy);
         }
 
         public Form1()
@@ -60,6 +74,16 @@ namespace Factory
             _toys.Add(toy);
             toy.Left = -toy.Width;
             mainPanel.Controls.Add(toy);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Faktory = new CarFactory();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Faktory = new BallFactory();
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Factory.Entitites
 {
-    class CarFactory : IToyFactory
+    class CarFactory : Abstractions.IToyFactory
     {
-        public Toy CreateNew()
+        public Abstractions.Toy CreateNew()
         {
             return new Car();
         }

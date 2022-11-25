@@ -31,7 +31,7 @@ namespace UnitTestExample
      TestCase("Tessster", false),
      TestCase("TESSSTER123", false),
      TestCase("tessster123", false),
-     TestCase("Tester1", false),
+     TestCase("Te1", false),
      TestCase("Tessster123", true)]
         public void TestValidatePassword(string password, bool expectedResult)
         {

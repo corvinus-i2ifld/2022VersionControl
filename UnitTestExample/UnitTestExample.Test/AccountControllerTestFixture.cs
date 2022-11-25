@@ -26,5 +26,23 @@ namespace UnitTestExample
             // Assert
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+        [Test, 
+     TestCase("Tessster", false),
+     TestCase("TESSSTER123", false),
+     TestCase("tessster123", false),
+     TestCase("Tester1", false),
+     TestCase("Tessster123", true)]
+        public void TestValidatePassword(string password, bool expectedResult)
+        {
+            // Arrange
+            var accountController = new AccountController();
+
+            // Act
+            var actualResult = accountController.ValidatePassword(password);
+
+            // Assert
+            Assert.AreEqual(expectedResult, actualResult);
+        }
     }
 }

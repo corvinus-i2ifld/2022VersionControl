@@ -24,29 +24,11 @@ namespace Mikroszimuláció
         {           
             InitializeComponent();
 
-            Population = GetPopulation(@"C:\Temp\nép.csv");
+            Population = GetPopulation(textBox1.Text);
             BirthProbabilities = GetBirth(@"C:\Temp\születés.csv");
             DeathProbabilities = GetDeath(@"C:\Temp\halál.csv");
 
-            // Végigmegyünk a vizsgált éveken
-            for (int year = 2005; year <= 2024; year++)
-            {
-                // Végigmegyünk az összes személyen
-                for (int i = 0; i < Population.Count; i++)
-                {
-                    SimStep(2024, Population[i]);
-                }
-
-                int nbrOfMales = (from x in Population
-                                  where x.Gender == Gender.Male && x.IsAlive
-                                  select x).Count();
-                int nbrOfFemales = (from x in Population
-                                    where x.Gender == Gender.Female && x.IsAlive
-                                    select x).Count();
-                Console.WriteLine(
-                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
-               
-            }
+            
         }
 
         private void SimStep(int year, Person person)
@@ -142,6 +124,29 @@ namespace Mikroszimuláció
             }
 
             return deathProbabilities;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Végigmegyünk a vizsgált éveken
+            for (int year = 2005; year <= 2024; year++)
+            {
+                // Végigmegyünk az összes személyen
+                for (int i = 0; i < Population.Count; i++)
+                {
+                    SimStep(numericUpDown1.TabIndex, Population[i]);
+                }
+
+                int nbrOfMales = (from x in Population
+                                  where x.Gender == Gender.Male && x.IsAlive
+                                  select x).Count();
+                int nbrOfFemales = (from x in Population
+                                    where x.Gender == Gender.Female && x.IsAlive
+                                    select x).Count();
+                Console.WriteLine(
+                    string.Format("Év:{0} Fiúk:{1} Lányok:{2}", year, nbrOfMales, nbrOfFemales));
+
+            }
         }
     }
 }

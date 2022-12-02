@@ -12,7 +12,11 @@ namespace Mikroszimuláció.Entities
         Female = 2
     }
 
-    Gender ádámNeme = Gender.Male;
-    Gender évaNeme = (Gender)2;
+   // Gender ádámNeme = Gender.Male;
+   // Gender évaNeme = (Gender)2;
 
+//    if (ádámNeme == Gender.Male)
+//{
+    
 }
+
